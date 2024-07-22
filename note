@@ -1,0 +1,46 @@
+const display = document.getElementById('display');
+
+function addDisplay(input) {
+    display.value += input;
+}
+
+function clearDisplay() {
+    display.value = '';
+}
+
+function calculate() {
+    try {
+        let expression = display.value;
+
+        // Regular expression to match numbers followed by %
+        let percentageRegex = /(\d+)%/g;
+
+        // Replace percentages with their calculated values
+        expression = expression.replace(percentageRegex, function(match, p1) {
+            return parseFloat(p1) / 100;
+        });
+
+        // Evaluate the modified expression
+        display.value = eval(expression);
+    } catch(err) {
+        display.value = 'Error';
+    }
+}
+
+// function addDisplay(input){
+//     if(input === '%'){
+//         display.value = (parseFloat(display.value)/100)*input;
+//     }
+//     else{
+//         display.value = display.value + input;
+//     }
+// }
+
+// function calculate(){
+//     try{
+//         let exp = display.value.replace(/%/g, '/100*')
+//     }
+//     catch(err){
+//         display.value = 'Error';
+//     }
+// }
